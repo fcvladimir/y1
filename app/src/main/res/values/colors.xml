@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#557CAC</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="divider_color">#CACACA</color>
+    <color name="bg_color">#EBEBEB</color>
+    <color name="task_status_in_work_color">#F89900</color>
+    <color name="white">#FFFFFFFF</color>
+
+</resources>

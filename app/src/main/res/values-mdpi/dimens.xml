@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="main_screen_margin">10dip</dimen>
+
+    <!-- Text size. -->
+    <dimen name="main_screen_text_size_title">16sp</dimen>
+    <dimen name="main_screen_text_size">14sp</dimen>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <solid android:color="@color/task_status_in_work_color" />
+
+    <corners
+        android:topLeftRadius="@dimen/large_angle_size"
+        android:topRightRadius="@dimen/large_angle_size"
+        android:bottomLeftRadius="@dimen/large_angle_size"
+        android:bottomRightRadius="@dimen/large_angle_size" />
+
+</shape>

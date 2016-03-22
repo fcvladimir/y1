@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Yalantis task 1</string>
+
+    <string name="task_type">Utilities</string>
+    <string name="task_status">In work</string>
+    <string name="task_photo">Task photo</string>
+
+    <string name="created_text">Created on</string>
+    <string name="created_value">25 Feb 2016</string>
+
+    <string name="registered_text">Registered on</string>
+    <string name="registered_value">26 Feb 2016</string>
+
+    <string name="deadline_text">Solve by</string>
+    <string name="deadline_value">03 May 2016</string>
+
+    <string name="assigned_text">Assigned</string>
+    <string name="assigned_value">Dnipropetropetrovsk MVK ()</string>
+
+    <string name="task_description">Open hatch (near the billboard), 18 and 19 trams turning area from Mira avenue to Donetsk highway</string>
+</resources>

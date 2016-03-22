@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Base" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MainActivity" parent="@style/AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextView.Base" parent="@style/TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextView.TaskType" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/main_screen_text_size_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="TextView.TaskText" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/main_screen_text_size</item>
+        <item name="android:textColor">#878787</item>
+    </style>
+
+    <style name="TextView.TaskValue" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/main_screen_text_size</item>
+        <item name="android:textColor">#3A3A3A</item>
+    </style>
+
+</resources>
