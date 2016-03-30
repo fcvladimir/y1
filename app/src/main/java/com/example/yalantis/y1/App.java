@@ -34,15 +34,15 @@ public class App extends Application {
             int memClass = ((ActivityManager)
                     getSystemService(Context.ACTIVITY_SERVICE))
                     .getMemoryClass();
-            memoryCacheSize = (memClass / 8) * 1024 * 1024;
+            memoryCacheSize = (memClass / 8) * 1024 * 1024; //[Comment] Magic numbers
         } else {
-            memoryCacheSize = 2 * 1024 * 1024;
+            memoryCacheSize = 2 * 1024 * 1024; //[Comment] Magic numbers
         }
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .threadPoolSize(5)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .threadPriority(Thread.NORM_PRIORITY - 2) //[Comment] Magic numbers
                 .memoryCacheSize(memoryCacheSize)
-                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize-1000000))
+                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize-1000000))  //[Comment] Magic numbers
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)

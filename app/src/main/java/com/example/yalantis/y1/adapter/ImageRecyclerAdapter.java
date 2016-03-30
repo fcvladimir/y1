@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdapter.RecyclerViewHolder> {
 
-    private List<Photo> persons;
+    private List<Photo> persons; //[Comment] Google code style
 
     public ImageRecyclerAdapter (List<Photo> persons){
         this.persons = persons;

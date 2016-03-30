@@ -16,6 +16,8 @@ import com.example.yalantis.y1.util.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+//[Comment] Wrong status bar color
+//[Comment] Images should be bigger
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView rvTaskPhoto;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvTaskSolveByValue;
     private TextView tvAssignedText;
     private TextView tvAssignedValue;
-    private TextView tvTaskDescription;
+    private TextView tvTaskDescription; //[Comment] Please use google code style
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvTaskSolveByValue = (TextView) findViewById(R.id.tvTaskSolveByValue);
         tvAssignedText = (TextView) findViewById(R.id.tvAssignedText);
         tvAssignedValue = (TextView) findViewById(R.id.tvAssignedValue);
-        tvTaskDescription = (TextView) findViewById(R.id.tvTaskDescription);
+        tvTaskDescription = (TextView) findViewById(R.id.tvTaskDescription); //[Comment] findViewById(R.id.tvTaskDescription).setOnClickListener(this);
     }
 
     /**
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String textToShow = "";
         switch (v.getId()) {
             case R.id.tvTaskTitle:
-                textToShow = tvTaskTitle.getText().toString();
+                textToShow = tvTaskTitle.getText().toString(); //[Comment] Wrong information. You should show control name
                 break;
             case R.id.tvTaskStatus:
                 textToShow = tvTaskStatus.getText().toString();
