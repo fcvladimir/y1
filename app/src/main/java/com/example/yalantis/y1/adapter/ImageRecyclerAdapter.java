@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.yalantis.y1.R;
-import com.example.yalantis.y1.model.Photo;
 import com.example.yalantis.y1.util.DialogUtil;
 import com.example.yalantis.y1.util.ImageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,10 +15,10 @@ import java.util.List;
 
 public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdapter.RecyclerViewHolder> {
 
-    private List<Photo> persons;
+    private List<String> mPhotoList;
 
-    public ImageRecyclerAdapter (List<Photo> persons){
-        this.persons = persons;
+    public ImageRecyclerAdapter (List<String> photoList){
+        this.mPhotoList = photoList;
     }
 
     @Override
@@ -31,12 +30,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        ImageLoader.getInstance().displayImage(persons.get(position).getImageUrl(), holder.ivTaskPhoto, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
+        ImageLoader.getInstance().displayImage(mPhotoList.get(position), holder.ivTaskPhoto, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
     }
 
     @Override
     public int getItemCount() {
-        return persons.size();
+        return mPhotoList.size();
     }
 
     /**
