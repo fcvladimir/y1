@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Yalantis task 1</string>
+    <string name="app_name" translatable="false">Yalantis task 1</string>
 
     <string name="task_type">Utilities</string>
     <string name="task_status">In work</string>
-    <string name="task_photo">Task photo</string>
+    <string name="task_photo" translatable="false">Task photo</string>
 
     <string name="created_text">Created on</string>
     <string name="created_value">25 Feb 2016</string>

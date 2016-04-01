@@ -1,0 +1,18 @@
+<resources>
+    <string name="task_type">Комунальне господарство</string>
+    <string name="task_status">В роботi</string>
+
+    <string name="created_text">Створено</string>
+    <string name="created_value">25 лютого 2016</string>
+
+    <string name="registered_text">Зареєстровано</string>
+    <string name="registered_value">26 лютого 2016</string>
+
+    <string name="deadline_text">Вирiшити до</string>
+    <string name="deadline_value">29 лютого 2016</string>
+
+    <string name="assigned_text">Вiдповiдальний</string>
+    <string name="assigned_value">Днiпропетровський МВК()</string>
+
+    <string name="task_description">Відкритий люк (біля рекламного щита), район повороту 18 і 19 трамваїв на проспект Миру iз Донецького шосе</string>
+</resources>

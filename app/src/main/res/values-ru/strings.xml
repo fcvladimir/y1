@@ -1,0 +1,18 @@
+<resources>
+    <string name="task_type">Коммунальное хозяйство</string>
+    <string name="task_status">В работе</string>
+
+    <string name="created_text">Создано</string>
+    <string name="created_value">25 февраля 2016</string>
+
+    <string name="registered_text">Зарегистрировано</string>
+    <string name="registered_value">26 февраля 2016</string>
+
+    <string name="deadline_text">Решить до</string>
+    <string name="deadline_value">29 февраля 2016</string>
+
+    <string name="assigned_text">Ответственный</string>
+    <string name="assigned_value">Днепропетровский РВК()</string>
+
+    <string name="task_description">Открытый люк (возле рекламного счита), район поворота 18 и 19 трамваев на проспект Мира с Донецкого шоссе</string>
+</resources>
