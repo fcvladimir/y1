@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         // print view control name. if i understand it correctly
-        DialogUtil.show(this, String.valueOf(v.getId()));
+        DialogUtil.show(this, String.valueOf(v.getId())
+                + "\n" // or
+                + v.getResources().getResourceEntryName(v.getId()));
     }
 }
