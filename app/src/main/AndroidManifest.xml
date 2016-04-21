@@ -21,6 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.TaskActivity"
+            android:screenOrientation="portrait"
+            android:label="CE-1257218"
+            android:theme="@style/TaskActivity">
+        </activity>
     </application>
 
 </manifest>

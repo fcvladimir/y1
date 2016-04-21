@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlTaskCard"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/main_list_item_task_height_size"
+    android:layout_marginTop="@dimen/main_list_padding_size"
+    android:layout_marginLeft="@dimen/main_list_padding_size"
+    android:layout_marginRight="@dimen/main_list_padding_size"
+    android:background="@drawable/rounded_view_shape">
+
+    <ImageView
+        android:id="@+id/ivTaskType"
+        android:layout_width="@dimen/main_list_item_type_width_size"
+        android:layout_marginTop="@dimen/main_list_item_type_margin_top_size"
+        android:layout_marginBottom="@dimen/main_list_item_type_margin_bottom_size"
+        android:contentDescription="@string/task_type_description"
+        style="@style/ImageView.Base" />
+
+    <TextView
+        android:id="@+id/tvTaskLikes"
+        android:layout_toLeftOf="@+id/vDivider"
+        android:layout_toStartOf="@+id/vDivider"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        style="@style/TextView.TaskLikes" />
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_toRightOf="@+id/ivTaskType"
+        android:layout_toEndOf="@+id/ivTaskType"
+        style="@style/TaskDivider" />
+
+    <TextView
+        android:id="@+id/tvTaskTitle"
+        android:layout_toRightOf="@+id/vDivider"
+        android:layout_toEndOf="@+id/vDivider"
+        android:layout_alignTop="@+id/ivTaskType"
+        style="@style/TextView.TaskTitle" />
+
+    <TextView
+        android:id="@+id/tvTaskAddress"
+        android:layout_toRightOf="@+id/vDivider"
+        android:layout_toEndOf="@+id/vDivider"
+        android:layout_below="@+id/tvTaskTitle"
+        android:layout_alignLeft="@id/tvTaskTitle"
+        android:layout_alignStart="@id/tvTaskTitle"
+        style="@style/TextView.TaskAddress" />
+
+    <TextView
+        android:id="@+id/tvTaskDate"
+        android:layout_toRightOf="@+id/vDivider"
+        android:layout_toEndOf="@+id/vDivider"
+        android:layout_below="@+id/tvTaskAddress"
+        android:layout_alignLeft="@+id/tvTaskTitle"
+        android:layout_alignStart="@+id/tvTaskTitle"
+        style="@style/TextView.TaskDate" />
+
+    <TextView
+        android:id="@+id/tvTaskDuration"
+        android:layout_below="@+id/tvTaskAddress"
+        style="@style/TextView.TaskDuration" />
+
+</RelativeLayout>

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">Yalantis task 1</string>
 
-    <string name="task_type">Utilities</string>
+    <string name="task_type_utilities">Utilities</string>
+    <string name="task_type_building">Landscaping and construction</string>
     <string name="task_status">In work</string>
-    <string name="task_photo" translatable="false">Task photo</string>
+    <string name="task_photo_description" translatable="false">Task photo</string>
+    <string name="task_type_description" translatable="false">Task type</string>
 
     <string name="created_text">Created on</string>
     <string name="created_value">25 Feb 2016</string>
@@ -18,4 +20,29 @@
     <string name="assigned_value">Dnipropetropetrovsk MVK ()</string>
 
     <string name="task_description">Open hatch (near the billboard), 18 and 19 trams turning area from Mira avenue to Donetsk highway</string>
+
+    <string name="all_notices">All notices</string>
+    <string name="notices_on_map">Notices on map</string>
+    <string name="drawer_header_text" translatable="false">e-contact</string>
+    <string name="signin">Signin</string>
+    <string name="msg_greetings">Made with love\n<font fgcolor="#ffF8873E"><u>IT Ruh Dnipro</u></font> and <font fgcolor="#ffF8873E"><u>Yalantis</u></font></string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="menu_filter">Filter</string>
+
+    <string name="tab_status_work">In work</string>
+    <string name="tab_status_done">Done</string>
+    <string name="tab_status_pending">Pending</string>
+
+    <string name="task_date_one">Feb, 09, 2016</string>
+    <string name="task_date_two">Feb, 08, 2016</string>
+    <string name="task_date_three">Feb, 05, 2016</string>
+
+    <string name="task_duration_days">%1$s days</string>
+
+    <string name="task_address_one">22. Krotova str., Dnipropetrovsk</string>
+    <string name="task_address_two">22. O. Gonchar str., Dnipropetrovsk</string>
+    <string name="task_address_three">22. B. Khmelnitskogo str., Dnipropetrovsk</string>
 </resources>

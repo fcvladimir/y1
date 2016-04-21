@@ -26,6 +26,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:support-v4:23.2.1'
     // UIL library, used to handle asynchronous loading and caching of images.
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

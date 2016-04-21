@@ -1,5 +1,6 @@
 <resources>
-    <string name="task_type">Коммунальное хозяйство</string>
+    <string name="task_type_utilities">Коммунальное хозяйство</string>
+    <string name="task_type_building">Благоустройство и строительство</string>
     <string name="task_status">В работе</string>
 
     <string name="created_text">Создано</string>
@@ -15,4 +16,24 @@
     <string name="assigned_value">Днепропетровский РВК()</string>
 
     <string name="task_description">Открытый люк (возле рекламного счита), район поворота 18 и 19 трамваев на проспект Мира с Донецкого шоссе</string>
+
+    <string name="menu_filter">Фильтр</string>
+
+    <string name="tab_status_work">В работе</string>
+    <string name="tab_status_done">Выполнено</string>
+    <string name="tab_status_pending">Ожидает</string>
+
+    <string name="task_date_one">Фев, 09, 2016</string>
+    <string name="task_date_two">Фев, 08, 2016</string>
+    <string name="task_date_three">Фев, 05, 2016</string>
+
+    <string name="task_duration_days">%1$s дней</string>
+
+    <string name="task_address_one">ул. Кротова, 22, Днепропетровск</string>
+    <string name="task_address_two">ул. О. Гончара, 22, Днепропетровск</string>
+    <string name="task_address_three">прос. Б. Хмельницкого, 22, Днепропетровск</string>
+    <string name="all_notices">Все ображения</string>
+    <string name="msg_greetings">Сделано с любовью\n<font fgcolor="#ffF8873E"><u>IT Ruh Dnipro</u></font> and <font fgcolor="#ffF8873E"><u>Yalantis</u></font></string>
+    <string name="notices_on_map">Обращения на карте</string>
+    <string name="signin">Войти в аккаунт</string>
 </resources>

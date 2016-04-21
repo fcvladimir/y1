@@ -1,56 +1,75 @@
 package com.example.yalantis.y1.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import com.example.yalantis.y1.R;
-import com.example.yalantis.y1.adapter.ImageRecyclerAdapter;
-import com.example.yalantis.y1.util.DialogUtil;
+import com.example.yalantis.y1.adapter.TaskStatusPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Toolbar mToolbar;
 
-    private RecyclerView mRvTaskPhoto;
-    private List<String> mPhotoList;
+    private TabLayout mTlTaskStatus;
+    private ViewPager mVpTaskStatus;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showBackButton();
+        initToolbar();
+
+        initDrawer();
 
         initViews();
 
-        fillPhotoUrl();
+        initPagerAdapter();
 
         initListeners();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
-     * Initialize Back button in actionBar.
+     * Initialize Toolbar.
      */
-    public void showBackButton() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+    private void initToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.tbMain);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+        }
+        setTitle(R.string.all_notices);
+    }
+
+    /**
+     * Initialize drawer in current activity.
+     */
+    @SuppressWarnings("deprecation")
+    private void initDrawer() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (drawerLayout != null) {
+            drawerLayout.setDrawerListener(toggle);
+        }
+        toggle.syncState();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -58,46 +77,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Initialize views in current activity.
      */
     private void initViews() {
-        mRvTaskPhoto = (RecyclerView)findViewById(R.id.rvTaskPhoto);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRvTaskPhoto.setLayoutManager(llm);
+        mTlTaskStatus = (TabLayout) findViewById(R.id.tlTaskStatus);
+        mVpTaskStatus = (ViewPager) findViewById(R.id.vpTaskStatus);
     }
 
     /**
-     * Get list of photo url.
+     * Initialize pager adapter in current activity.
      */
-    private void fillPhotoUrl() {
-        mPhotoList = new ArrayList<>();
-        mPhotoList.add("http://dl1.joxi.net/drive/0005/1477/374213/160320/0a317e11a7.jpg");
-        mPhotoList.add("http://dl1.joxi.net/drive/0005/1477/374213/160320/97311de5f6.jpg");
+    private void initPagerAdapter() {
+        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_work)));
+        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_done)));
+        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_pending)));
+        mTlTaskStatus.setTabGravity(TabLayout.GRAVITY_FILL);
+        TaskStatusPagerAdapter adapter = new TaskStatusPagerAdapter
+                (getSupportFragmentManager(), mTlTaskStatus.getTabCount());
+
+        mVpTaskStatus.setAdapter(adapter);
     }
 
     /**
      * Initialize view listeners in current activity.
      */
     private void initListeners() {
-        ImageRecyclerAdapter adapter = new ImageRecyclerAdapter(mPhotoList);
-        mRvTaskPhoto.setAdapter(adapter);
+        mVpTaskStatus.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTlTaskStatus));
+        mTlTaskStatus.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mVpTaskStatus.setCurrentItem(tab.getPosition());
+            }
 
-        findViewById(R.id.tvTaskTitle).setOnClickListener(this);
-        findViewById(R.id.tvTaskStatus).setOnClickListener(this);
-        findViewById(R.id.tvTaskCreatedOnText).setOnClickListener(this);
-        findViewById(R.id.tvTaskCreatedOnValue).setOnClickListener(this);
-        findViewById(R.id.tvTaskRegisteredOnText).setOnClickListener(this);
-        findViewById(R.id.tvTaskRegisteredOnValue).setOnClickListener(this);
-        findViewById(R.id.tvTaskSolveByText).setOnClickListener(this);
-        findViewById(R.id.tvTaskSolveByValue).setOnClickListener(this);
-        findViewById(R.id.tvAssignedText).setOnClickListener(this);
-        findViewById(R.id.tvAssignedValue).setOnClickListener(this);
-        findViewById(R.id.tvTaskDescription).setOnClickListener(this);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        // print view control name. if i understand it correctly
-        DialogUtil.show(this, String.valueOf(v.getId())
-                + "\n" // or
-                + v.getResources().getResourceEntryName(v.getId()));
-    }
 }

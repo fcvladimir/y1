@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#47B1C3</color>
     <color name="colorPrimary">#557CAC</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+
+    <!-- Task. -->
     <color name="divider_color">#CACACA</color>
     <color name="bg_color">#EBEBEB</color>
     <color name="task_status_in_work_color">#F89900</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Main. -->
+    <color name="fab_color">#FF9C26</color>
+
+    <!-- Main Drawer. -->
+    <color name="drawer_title_color">#CCD8E6</color>
+    <color name="drawer_bottom_text_color">#F8873E</color>
+    <color name="drawer_background_color">@color/white</color>
+    <color name="drawer_text_color">@color/black</color>
+
+    <!-- Main Tabs. -->
+    <color name="tab_indicator_color">@color/white</color>
+    <color name="tab_text_color">@color/white</color>
+
+    <!-- Main List Item. -->
+    <color name="task_duration_color">#54000000</color>
+    <color name="task_address_color">#54000000</color>
+    <color name="task_date_color">#54000000</color>
+    <color name="task_title_color">#FF000000</color>
+    <color name="task_divider_color">#FFE0E0E0</color>
+    <color name="task_likes_color">#23000000</color>
 
 </resources>

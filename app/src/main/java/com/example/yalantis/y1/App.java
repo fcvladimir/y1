@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 
+import com.example.yalantis.y1.manager.ContentManager;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.FIFOLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -12,6 +13,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class App extends Application {
+
+    public static ContentManager contentManager;
 
     @Override
     public void onCreate() {
@@ -21,7 +24,7 @@ public class App extends Application {
     }
 
     private void initApplication() {
-
+        contentManager = new ContentManager(this);
         initImageLoader();
     }
 

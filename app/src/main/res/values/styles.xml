@@ -14,11 +14,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainActivity" parent="@style/AppTheme.Base">
+    <style name="AppTheme.Base.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TaskActivity" parent="@style/AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MainActivity" parent="@style/AppTheme.Base.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
 
     <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ImageView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -43,5 +58,79 @@
         <item name="android:textSize">@dimen/main_screen_text_size</item>
         <item name="android:textColor">#3A3A3A</item>
     </style>
+
+    <style name="TextView.DrawerTitle" parent="@style/TextView.Base">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/drawer_title_color</item>
+        <item name="android:textSize">@dimen/drawer_header_text_size</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingTop">@dimen/drawer_header_padding_top</item>
+        <item name="android:paddingBottom">@dimen/drawer_header_padding_bottom</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:text">@string/drawer_header_text</item>
+    </style>
+
+    <style name="TextView.TaskDuration" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/task_duration_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/main_list_item_duration_margin_right_size</item>
+        <item name="android:textColor">@color/task_duration_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/main_list_item_duration_margin_top_size</item>
+    </style>
+
+    <style name="TextView.TaskAddress" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/task_address_text</item>
+        <item name="android:textColor">@color/task_address_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">@dimen/main_list_item_address_margin_size</item>
+    </style>
+
+    <style name="TextView.TaskDate" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/task_date_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/task_date_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/main_list_item_date_margin_size</item>
+    </style>
+
+    <style name="TextView.TaskTitle" parent="@style/TextView.Base">
+        <item name="android:textSize">@dimen/task_title_text</item>
+        <item name="android:textColor">@color/task_title_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="TaskDivider">
+        <item name="android:background">@color/task_divider_color</item>
+        <item name="android:layout_width">@dimen/main_list_item_divider_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginRight">@dimen/main_list_item_divider_margin_size</item>
+    </style>
+
+    <style name="TextView.TaskLikes" parent="@style/TextView.Base">
+        <item name="android:textColor">@color/task_likes_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawablePadding">@dimen/main_list_item_likes_padding_drawable_size</item>
+        <item name="android:drawableLeft">@drawable/ic_launcher</item>
+        <item name="android:paddingLeft">@dimen/main_list_item_likes_padding_left_size</item>
+        <item name="android:paddingRight">@dimen/main_list_item_likes_padding_right_size</item>
+        <item name="android:paddingBottom">@dimen/main_list_item_likes_padding_bottom_size</item>
+    </style>
+
+    <style name="ImageView.Base" parent="@style/ImageView">
+    </style>
+
+    <style name="ImageView.TaskPhoto" parent="@style/ImageView">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:contentDescription">@string/task_photo_description</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>
