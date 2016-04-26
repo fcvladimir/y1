@@ -40,7 +40,7 @@ public class App extends Application {
                     .getMemoryClass();
             memoryCacheSize = (memClass / 8) * 1024 * 1024; // 1/8 of app memory limit
         } else {
-            memoryCacheSize = 2 * 1024 * 1024;
+            memoryCacheSize = 2 * 1024 * 1024; //[Comment] Magic numbers
         }
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .threadPoolSize(5)
@@ -66,9 +66,9 @@ public class App extends Application {
                  * <b>NOTE:</b> This cache uses strong and weak references for stored Bitmaps. Strong references - for limited count of
                  * Bitmaps (depends on cache size), weak references - for all other cached Bitmaps.
                  */
-                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize-1000000))
+                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize-1000000)) //[Comment] Magic numbers
                 .denyCacheImageMultipleSizesInMemory()
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+                .discCacheFileNameGenerator(new Md5FileNameGenerator()) // [Comment] Deprecated
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .build();
 

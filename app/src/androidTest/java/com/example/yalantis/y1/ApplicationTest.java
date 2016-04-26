@@ -10,5 +10,5 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     // class was auto-generated on project creation
     public ApplicationTest() {
         super(Application.class);
-    }
+    } //[Comment] Dead code
 }

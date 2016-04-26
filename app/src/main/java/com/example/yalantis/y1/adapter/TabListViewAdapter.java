@@ -24,7 +24,7 @@ public class TabListViewAdapter extends BaseAdapter {
 
     public TabListViewAdapter(Context context, List<TaskModel> taskList) {
         this.mContext = context;
-        this.mTaskList = taskList;
+        this.mTaskList = taskList; //[Comment] Don't use "this". Do you what this word means?
     }
 
     @Override

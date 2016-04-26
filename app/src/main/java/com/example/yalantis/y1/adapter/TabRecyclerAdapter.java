@@ -21,7 +21,7 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
     private List<TaskModel> mTaskList;
 
     public TabRecyclerAdapter(List<TaskModel> taskList){
-        this.mTaskList = taskList;
+        this.mTaskList = taskList; //[Comment] Wrong
     }
 
     @Override

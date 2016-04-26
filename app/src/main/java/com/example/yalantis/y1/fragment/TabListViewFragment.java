@@ -27,7 +27,7 @@ public class TabListViewFragment extends Fragment {
         View fragmentView = inflater.inflate(R.layout.fragment_tab_listview, container, false);
 
         initViews(fragmentView);
-
+        //[Comment] Wrong formatting
         fillTaskList();
 
         initListeners();

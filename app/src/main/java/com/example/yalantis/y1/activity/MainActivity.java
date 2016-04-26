@@ -14,6 +14,7 @@ import android.view.Menu;
 import com.example.yalantis.y1.R;
 import com.example.yalantis.y1.adapter.TaskStatusPagerAdapter;
 
+//[Comment] Wrong status bar color
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
