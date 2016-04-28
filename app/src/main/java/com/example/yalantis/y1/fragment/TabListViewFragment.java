@@ -19,24 +19,23 @@ public class TabListViewFragment extends Fragment {
         return new TabListViewFragment();
     }
 
+    private View mView;
     private ListView mLvTaskPending;
     private List<TaskModel> mTaskList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_tab_listview, container, false);
+        mView = inflater.inflate(R.layout.fragment_tab_listview, container, false);
 
-        initViews(fragmentView);
-
+        initViews();
         fillTaskList();
-
         initListeners();
 
-        return fragmentView;
+        return mView;
     }
 
-    private void initViews(View v) {
-        mLvTaskPending = (ListView) v.findViewById(R.id.lvTaskTabListView);
+    private void initViews() {
+        mLvTaskPending = (ListView) mView.findViewById(R.id.lvTaskTabListView);
     }
 
     private void fillTaskList() {

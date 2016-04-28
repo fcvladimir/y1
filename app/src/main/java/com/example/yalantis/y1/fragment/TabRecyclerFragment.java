@@ -20,27 +20,26 @@ public class TabRecyclerFragment extends Fragment {
         return new TabRecyclerFragment();
     }
 
+    private View mView;
     private RecyclerView mRvTaskWork;
     private List<TaskModel> mTaskList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_tab_recycler, container, false);
+        mView = inflater.inflate(R.layout.fragment_tab_recycler, container, false);
 
-        initViews(fragmentView);
-
+        initViews();
         fillTaskList();
-
         initListeners();
 
-        return fragmentView;
+        return mView;
     }
 
-    private void initViews(View v) {
-        mRvTaskWork = (RecyclerView) v.findViewById(R.id.rvTaskTabRecycler);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvTaskWork.setLayoutManager(llm);
+    private void initViews() {
+        mRvTaskWork = (RecyclerView) mView.findViewById(R.id.rvTaskTabRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRvTaskWork.setLayoutManager(linearLayoutManager);
     }
 
     private void fillTaskList() {

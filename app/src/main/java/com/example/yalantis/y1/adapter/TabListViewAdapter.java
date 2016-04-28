@@ -23,8 +23,8 @@ public class TabListViewAdapter extends BaseAdapter {
     private List<TaskModel> mTaskList;
 
     public TabListViewAdapter(Context context, List<TaskModel> taskList) {
-        this.mContext = context;
-        this.mTaskList = taskList;
+        mContext = context;
+        mTaskList = taskList;
     }
 
     @Override
