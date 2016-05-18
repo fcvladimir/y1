@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_tabs_title">
+        <item>@string/tab_status_work</item>
+        <item>@string/tab_status_done</item>
+        <item>@string/tab_status_pending</item>
+    </string-array>
+
+</resources>

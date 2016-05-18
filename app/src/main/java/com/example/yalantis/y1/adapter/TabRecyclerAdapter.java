@@ -1,5 +1,6 @@
 package com.example.yalantis.y1.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,17 +11,24 @@ import android.widget.TextView;
 
 import com.example.yalantis.y1.R;
 import com.example.yalantis.y1.activity.TaskActivity;
-import com.example.yalantis.y1.model.TaskModel;
+import com.example.yalantis.y1.model.TaskBean;
 import com.example.yalantis.y1.util.ImageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.RecyclerViewHolder> {
 
-    private List<TaskModel> mTaskList;
+    private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private List<TaskBean> mTaskList;
 
-    public TabRecyclerAdapter(List<TaskModel> taskList){
+    public TabRecyclerAdapter(List<TaskBean> taskList){
         mTaskList = taskList;
     }
 
@@ -33,12 +41,36 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        ImageLoader.getInstance().displayImage(mTaskList.get(position).getTaskUrl(), holder.ivTaskType, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
-        holder.tvTaskLikes.setText(mTaskList.get(position).getTaskLikes() + "");
-        holder.tvTaskTitle.setText(mTaskList.get(position).getTaskTitle());
-        holder.tvTaskAddress.setText(mTaskList.get(position).getTaskAddress());
-        holder.tvTaskDate.setText(mTaskList.get(position).getTaskDate());
-        holder.tvTaskDuration.setText(holder.tvTaskDuration.getContext().getString(R.string.task_duration_days, mTaskList.get(position).getTaskDuration()));
+        if (mTaskList.get(position).getFiles().size() > 0) {
+            ImageLoader.getInstance().displayImage("http://dev-contact.yalantis.com/files/ticket/" + mTaskList.get(position).getFiles().get(0).getFilename(), holder.ivTaskType, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
+        }
+        holder.tvTaskLikes.setText(mTaskList.get(position).getLikes_counter());
+        holder.tvTaskTitle.setText(mTaskList.get(position).getTitle());
+        holder.tvTaskAddress.setText(getFullAddress(position));
+        holder.tvTaskDate.setText(getTaskDate(position));
+        holder.tvTaskDuration.setText(getDifferenceDays(holder.tvTaskDuration.getContext(), new Date(mTaskList.get(position).getCreated_date()), new Date(mTaskList.get(position).getCreated_date())));
+    }
+
+    private StringBuilder getFullAddress(int position) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getStreet_type().getShort_name());
+        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getName());
+        stringBuilder.append(", ");
+        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getHouse().getName());
+        stringBuilder.append("/");
+        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getFlat());
+        return stringBuilder;
+    }
+
+    private String getTaskDate(int position) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(mTaskList.get(position).getCreated_date());
+        return formatter.format(calendar.getTime());
+    }
+
+    public static String getDifferenceDays(Context context, Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return context.getString(R.string.task_duration_days, TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.yalantis.y1.fragment.TabListViewFragment;
 import com.example.yalantis.y1.fragment.TabRecyclerFragment;
 
 public class TaskStatusPagerAdapter extends FragmentStatePagerAdapter {
@@ -21,11 +20,11 @@ public class TaskStatusPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return TabRecyclerFragment.newInstance();
+                return TabRecyclerFragment.newInstance(position);
             case 1:
-                return TabRecyclerFragment.newInstance();
+                return TabRecyclerFragment.newInstance(position);
             case 2:
-                return TabListViewFragment.newInstance();
+                return TabRecyclerFragment.newInstance(position);
             default:
                 return null;
         }

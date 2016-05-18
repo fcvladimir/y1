@@ -1,8 +1,9 @@
-package com.example.yalantis.y1.activity;
+package com.example.yalantis.y1.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -13,13 +14,24 @@ import android.view.Menu;
 
 import com.example.yalantis.y1.R;
 import com.example.yalantis.y1.adapter.TaskStatusPagerAdapter;
+import com.example.yalantis.y1.interfaces.IShowedFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
 
-    private Toolbar mToolbar;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private TabLayout mTlTaskStatus;
-    private ViewPager mVpTaskStatus;
+public class MainActivity extends AppCompatActivity implements MainContract {
+
+    @BindView(R.id.tbMain)
+    Toolbar mToolbar;
+    @BindView(R.id.tlTaskStatus)
+    TabLayout mTlTaskStatus;
+    @BindView(R.id.vpTaskStatus)
+    ViewPager mVpTaskStatus;
+
+    private TaskStatusPagerAdapter mAdapter;
+    private MainPresenterImpl mMainPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        initPagerAdapter();
+        initPresenter();
+
+        loadSectionsTabs();
 
         initListeners();
     }
@@ -76,29 +90,43 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Initialize views in current activity.
      */
-    private void initViews() {
-        mTlTaskStatus = (TabLayout) findViewById(R.id.tlTaskStatus);
-        mVpTaskStatus = (ViewPager) findViewById(R.id.vpTaskStatus);
+    @Override
+    public void initViews() {
+        ButterKnife.bind(this);
+//        mTlTaskStatus = (TabLayout) findViewById(R.id.tlTaskStatus);
+//        mVpTaskStatus = (ViewPager) findViewById(R.id.vpTaskStatus);
+    }
+
+    @Override
+    public void initPresenter() {
+        mMainPresenter = new MainPresenterImpl(this);
+    }
+
+    @Override
+    public void loadSectionsTabs() {
+        mMainPresenter.loadSectionsTabs();
     }
 
     /**
      * Initialize pager adapter in current activity.
      */
-    private void initPagerAdapter() {
-        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_work)));
-        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_done)));
-        mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(getString(R.string.tab_status_pending)));
+    @Override
+    public void initPagerAdapter(List<String> listTitleTabs) {
+        for (int i=0; i<listTitleTabs.size(); i++) {
+            mTlTaskStatus.addTab(mTlTaskStatus.newTab().setText(listTitleTabs.get(i)));
+        }
         mTlTaskStatus.setTabGravity(TabLayout.GRAVITY_FILL);
-        TaskStatusPagerAdapter adapter = new TaskStatusPagerAdapter
+        mAdapter = new TaskStatusPagerAdapter
                 (getSupportFragmentManager(), mTlTaskStatus.getTabCount());
 
-        mVpTaskStatus.setAdapter(adapter);
+        mVpTaskStatus.setAdapter(mAdapter);
     }
 
     /**
      * Initialize view listeners in current activity.
      */
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         mVpTaskStatus.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTlTaskStatus));
         mTlTaskStatus.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -113,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        mVpTaskStatus.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment fragment = (Fragment) mAdapter.instantiateItem(mVpTaskStatus, position);
+                if (fragment instanceof IShowedFragment) {
+                    ((IShowedFragment) fragment).onShowedFragment();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });

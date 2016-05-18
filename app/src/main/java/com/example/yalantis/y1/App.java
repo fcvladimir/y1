@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class App extends Application {
 
+    private static App mInstance;
     public static ContentManager contentManager;
 
     @Override
@@ -17,7 +18,12 @@ public class App extends Application {
         initApplication();
     }
 
+    public static App getInstance() {
+        return mInstance;
+    }
+
     private void initApplication() {
+        mInstance = this;
         contentManager = new ContentManager(this);
         initImageLoader();
     }
