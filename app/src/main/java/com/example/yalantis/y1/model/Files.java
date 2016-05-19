@@ -2,9 +2,6 @@ package com.example.yalantis.y1.model;
 
 import io.realm.RealmObject;
 
-/**
- * Created by Pinta on 18.05.2016.
- */
 public class Files extends RealmObject {
 
     private String id;

@@ -53,12 +53,21 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
 
     private StringBuilder getFullAddress(int position) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getStreet_type().getShort_name());
-        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getName());
-        stringBuilder.append(", ");
-        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getHouse().getName());
-        stringBuilder.append("/");
-        stringBuilder.append(mTaskList.get(position).getUser().getAddress().getFlat());
+        if (mTaskList.get(position).getUser().getAddress().getStreet() != null) {
+            stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getStreet_type().getShort_name());
+            stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getName());
+            stringBuilder.append(", ");
+            stringBuilder.append(mTaskList.get(position).getUser().getAddress().getHouse().getName());
+            stringBuilder.append("/");
+            stringBuilder.append(mTaskList.get(position).getUser().getAddress().getFlat());
+        } else {
+            stringBuilder.append(mTaskList.get(position).getAddress().getStreet().getStreet_type().getShort_name());
+            stringBuilder.append(mTaskList.get(position).getAddress().getStreet().getName());
+            stringBuilder.append(", ");
+            stringBuilder.append(mTaskList.get(position).getAddress().getHouse().getName());
+            stringBuilder.append("/");
+            stringBuilder.append(mTaskList.get(position).getAddress().getFlat());
+        }
         return stringBuilder;
     }
 

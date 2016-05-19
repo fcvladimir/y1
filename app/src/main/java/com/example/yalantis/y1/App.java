@@ -6,6 +6,9 @@ import com.example.yalantis.y1.manager.ContentManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class App extends Application {
 
     private static App mInstance;
@@ -26,6 +29,7 @@ public class App extends Application {
         mInstance = this;
         contentManager = new ContentManager(this);
         initImageLoader();
+        initRealm();
     }
 
     /**
@@ -33,5 +37,9 @@ public class App extends Application {
      */
     private void initImageLoader() {
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+    }
+
+    private void initRealm() {
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(this).build());
     }
 }
