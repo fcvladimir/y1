@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.RecyclerViewHolder> {
 
     private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -42,16 +45,16 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         if (mTaskList.get(position).getFiles().size() > 0) {
-            ImageLoader.getInstance().displayImage("http://dev-contact.yalantis.com/files/ticket/" + mTaskList.get(position).getFiles().get(0).getFilename(), holder.ivTaskType, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
+            ImageLoader.getInstance().displayImage("http://dev-contact.yalantis.com/files/ticket/" + mTaskList.get(position).getCategory().getImage(), holder.ivTaskType, ImageUtils.UIL_USER_PHOTO_DISPLAY_OPTIONS);
         }
         holder.tvTaskLikes.setText(mTaskList.get(position).getLikes_counter());
         holder.tvTaskTitle.setText(mTaskList.get(position).getTitle());
-        holder.tvTaskAddress.setText(getFullAddress(position));
+        holder.tvTaskAddress.setText(getFullAddress(holder.tvTaskAddress.getContext(), position));
         holder.tvTaskDate.setText(getTaskDate(position));
         holder.tvTaskDuration.setText(getDifferenceDays(holder.tvTaskDuration.getContext(), new Date(mTaskList.get(position).getCreated_date()), new Date(mTaskList.get(position).getCreated_date())));
     }
 
-    private StringBuilder getFullAddress(int position) {
+    private StringBuilder getFullAddress(Context context, int position) {
         StringBuilder stringBuilder = new StringBuilder();
         if (mTaskList.get(position).getUser().getAddress().getStreet() != null) {
             stringBuilder.append(mTaskList.get(position).getUser().getAddress().getStreet().getStreet_type().getShort_name());
@@ -61,12 +64,7 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
             stringBuilder.append("/");
             stringBuilder.append(mTaskList.get(position).getUser().getAddress().getFlat());
         } else {
-            stringBuilder.append(mTaskList.get(position).getAddress().getStreet().getStreet_type().getShort_name());
-            stringBuilder.append(mTaskList.get(position).getAddress().getStreet().getName());
-            stringBuilder.append(", ");
-            stringBuilder.append(mTaskList.get(position).getAddress().getHouse().getName());
-            stringBuilder.append("/");
-            stringBuilder.append(mTaskList.get(position).getAddress().getFlat());
+            stringBuilder.append(context.getString(R.string.task_no_address));
         }
         return stringBuilder;
     }
@@ -90,26 +88,26 @@ public class TabRecyclerAdapter extends RecyclerView.Adapter<TabRecyclerAdapter.
     /**
      * Class to hold recycleView items.
      */
-    public static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // View holder for gridview recycler view as we used in listview
-        private View rlTaskCard;
-        private ImageView ivTaskType;
-        private TextView tvTaskLikes;
-        private TextView tvTaskTitle;
-        private TextView tvTaskAddress;
-        private TextView tvTaskDate;
-        private TextView tvTaskDuration;
+        @BindView(R.id.rlTaskCard)
+        View rlTaskCard;
+        @BindView(R.id.ivTaskType)
+        ImageView ivTaskType;
+        @BindView(R.id.tvTaskLikes)
+        TextView tvTaskLikes;
+        @BindView(R.id.tvTaskTitle)
+        TextView tvTaskTitle;
+        @BindView(R.id.tvTaskAddress)
+        TextView tvTaskAddress;
+        @BindView(R.id.tvTaskDate)
+        TextView tvTaskDate;
+        @BindView(R.id.tvTaskDuration)
+        TextView tvTaskDuration;
 
         public RecyclerViewHolder(View view) {
             super(view);
-            // Find all views ids
-            rlTaskCard = view.findViewById(R.id.rlTaskCard);
-            ivTaskType = (ImageView) view.findViewById(R.id.ivTaskType);
-            tvTaskLikes = (TextView) view.findViewById(R.id.tvTaskLikes);
-            tvTaskTitle = (TextView) view.findViewById(R.id.tvTaskTitle);
-            tvTaskAddress = (TextView) view.findViewById(R.id.tvTaskAddress);
-            tvTaskDate = (TextView) view.findViewById(R.id.tvTaskDate);
-            tvTaskDuration = (TextView) view.findViewById(R.id.tvTaskDuration);
+            ButterKnife.bind(this, view);
             rlTaskCard.setOnClickListener(this);
         }
 

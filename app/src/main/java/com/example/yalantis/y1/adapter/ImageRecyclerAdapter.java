@@ -13,6 +13,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdapter.RecyclerViewHolder> {
 
     private List<String> mPhotoList;
@@ -43,12 +46,13 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
      */
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // View holder for gridview recycler view as we used in listview
+        @BindView(R.id.ivTaskPhoto)
         private ImageView ivTaskPhoto;
 
         public RecyclerViewHolder(View view) {
             super(view);
             // Find all views ids
-            ivTaskPhoto = (ImageView) view.findViewById(R.id.ivTaskPhoto);
+            ButterKnife.bind(this, view);
             ivTaskPhoto.setOnClickListener(this);
         }
 

@@ -40,6 +40,8 @@
     <string name="task_date_two">Feb, 08, 2016</string>
     <string name="task_date_three">Feb, 05, 2016</string>
 
+    <string name="task_no_address">No address</string>
+
     <string name="task_duration_days">%1$s days</string>
 
     <string name="task_address_one">22. Krotova str., Dnipropetrovsk</string>

@@ -13,8 +13,7 @@ import com.example.yalantis.y1.R;
 import com.example.yalantis.y1.adapter.TabRecyclerAdapter;
 import com.example.yalantis.y1.interfaces.IShowedFragment;
 import com.example.yalantis.y1.model.TaskBean;
-
-import java.util.List;
+import com.yalantis.pulltomakesoup.PullToRefreshView;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -33,12 +32,17 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
     private View mView;
     private TabRecyclerAdapter tabRecyclerAdapter;
     private RecyclerView mRvTaskWork;
-//    private List<TaskModel> mTaskList;
+    private PullToRefreshView mPullToRefreshView;
 
-    private int page = 1;
+    private LinearLayoutManager mLayoutManager;
+    private boolean loading = true;
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
+
+    private int page;
     private ExplorePresenter explorePresenter;
 
     private Realm realm;
+    private RealmResults<TaskBean> results;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,28 +50,12 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
         realm = Realm.getDefaultInstance();
         getDataFromBundle();
 
-//        if (mCurrTabNumber == 0) {
-//            initViews();
-//        fillTaskList();
-//            initListeners();
-            if (tabRecyclerAdapter == null && mCurrTabNumber == 0) {
-//                explorePresenter = new ExplorePresenter(getContext());
-//                explorePresenter.attachView(this);
-//                page = 1;
-//                explorePresenter.loadList(page);
-                getTaskList();
-            }
-//            log(mCurrTabNumber + " - onCreateView___");
-//        } else {
-//            log(mCurrTabNumber + " - onCreateView");
-//        }
-
-//        if (tabRecyclerAdapter == null) {
-//            explorePresenter = new ExplorePresenter(getContext());
-//            explorePresenter.attachView(this);
-//            page = 1;
-//            explorePresenter.loadList(page);
-//        }
+        if (mCurrTabNumber == 0) {
+            initViews();
+            initPresenter();
+            initListeners();
+            getTaskList();
+        }
 
         return mView;
     }
@@ -79,30 +67,8 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
     }
 
     private void getTaskList() {
-        initViews();
-        initListeners();
-
-        RealmResults<TaskBean> results/* = realm.where(TaskBean.class).equalTo("state.name", "В роботі").findAll()*/ = null;
-//        log(results.size() + " 1 !!!!!!!!!!!!");
-//        realm.beginTransaction();
-//        log(results.deleteAllFromRealm());
-//        realm.commitTransaction();
-//        realm = Realm.getDefaultInstance();
-        switch (mCurrTabNumber) {
-            case 0:
-                results = realm.where(TaskBean.class).equalTo("state.name", "В роботі").findAll();
-                break;
-            case 1:
-                results = realm.where(TaskBean.class).equalTo("state.name", "Виконано").findAll();
-                break;
-            case 2:
-                results = realm.where(TaskBean.class).equalTo("state.name", "На модерації").findAll();
-                break;
-        }
-
+        getTaskListByStateName();
         if (results.size() == 0) {
-            explorePresenter = new ExplorePresenter(getContext());
-            explorePresenter.attachView(this);
             page = 1;
             explorePresenter.loadList(page, mCurrTabNumber);
         } else {
@@ -117,45 +83,42 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
 
     private void initViews() {
         mRvTaskWork = (RecyclerView) mView.findViewById(R.id.rvTaskTabRecycler);
+        mPullToRefreshView = (PullToRefreshView) mView.findViewById(R.id.pull_to_refresh);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvTaskWork.setLayoutManager(mLayoutManager);
     }
 
-//    private void fillTaskList() {
-//        mTaskList = App.contentManager.getTaskList();
-//    }
-
-    private LinearLayoutManager mLayoutManager;
-    private boolean loading = true;
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
-
     private void initListeners() {
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                realm.beginTransaction();
+                results.deleteAllFromRealm();
+                realm.commitTransaction();
+                page = 1;
+                explorePresenter.loadList(page, mCurrTabNumber);
+            }
+        });
         mRvTaskWork.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 if (dy > 0) {//check for scroll down
-
                     visibleItemCount = mLayoutManager.getChildCount();
                     totalItemCount = mLayoutManager.getItemCount();
                     pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
                     if (loading) {
-                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-//                            loading = false;
-//                            page++;
-//                            explorePresenter.loadList(page, mCurrTabNumber);
-//                            Log.d("mylog", "Last Item Wow !");
-                            //Do pagination.. i.e. fetch new data
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                            loading = false;
+                            page++;
+                            explorePresenter.loadList(page, mCurrTabNumber);
                         }
                     }
                 }
             }
         });
-//        tabRecyclerAdapter = new TabRecyclerAdapter(mTaskList);
-//        mRvTaskWork.setAdapter(tabRecyclerAdapter);
     }
 
     private void log(Object o) {
@@ -164,25 +127,33 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
 
     @Override
     public void onShowedFragment() {
-//        getDataFromBundle();
-//        initViews();
-//        fillTaskList();
-//        initListeners();
+        initViews();
+        initPresenter();
+        initListeners();
         getTaskList();
-        log(mCurrTabNumber + " = onShowedFragment");
     }
 
     @Override
-    public void refresh(List<TaskBean> data) {
-//        log(data.size() + " - size");
-        log("refresh");
+    public void initPresenter() {
+        explorePresenter = new ExplorePresenter(getContext());
+        explorePresenter.attachView(this);
+    }
 
-        RealmResults<TaskBean> results/* = realm.where(TaskBean.class).equalTo("state.name", "В роботі").findAll()*/ = null;
-//        log(results.size() + " 1 !!!!!!!!!!!!");
-//        realm.beginTransaction();
-//        log(results.deleteAllFromRealm());
-//        realm.commitTransaction();
-//        realm = Realm.getDefaultInstance();
+    @Override
+    public void refresh() {
+        mPullToRefreshView.setRefreshing(false);
+        getTaskListByStateName();
+        tabRecyclerAdapter = new TabRecyclerAdapter(results);
+        mRvTaskWork.setAdapter(tabRecyclerAdapter);
+    }
+
+    @Override
+    public void loadMore() {
+        getTaskListByStateName();
+        tabRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    private void getTaskListByStateName() {
         switch (mCurrTabNumber) {
             case 0:
                 results = realm.where(TaskBean.class).equalTo("state.name", "В роботі").findAll();
@@ -194,22 +165,6 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
                 results = realm.where(TaskBean.class).equalTo("state.name", "На модерації").findAll();
                 break;
         }
-
-//        log(results.size() + " 1 !!!!!!!!!!!!");
-
-//        log(results.size() + " 2 !!!!!!!!!!!!");
-//        results = realm.where(TaskBean.class).equalTo("state.id", "1").findAll();
-//        log(results.size() + " 3 !!!!!!!!!!!!");
-//        mContentsArray.addAll(results);
-
-
-        tabRecyclerAdapter = new TabRecyclerAdapter(results);
-        mRvTaskWork.setAdapter(tabRecyclerAdapter);
-    }
-
-    @Override
-    public void loadMore(List<TaskBean> data) {
-        log("loadMore");
     }
 
     @Override
@@ -242,4 +197,5 @@ public class TabRecyclerFragment extends Fragment implements IShowedFragment, Ex
     public void showNetError(View.OnClickListener onClickListener) {
         log("showNetError");
     }
+
 }

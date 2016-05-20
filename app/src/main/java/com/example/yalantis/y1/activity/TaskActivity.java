@@ -15,8 +15,12 @@ import com.example.yalantis.y1.adapter.ImageRecyclerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TaskActivity extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.rvTaskPhoto)
     private RecyclerView mRvTaskPhoto;
     private List<String> mPhotoList;
 
@@ -59,7 +63,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
      * Initialize views in current activity.
      */
     private void initViews() {
-        mRvTaskPhoto = (RecyclerView)findViewById(R.id.rvTaskPhoto);
+        ButterKnife.bind(this);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRvTaskPhoto.setLayoutManager(llm);

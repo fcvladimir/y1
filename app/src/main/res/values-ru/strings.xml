@@ -27,6 +27,8 @@
     <string name="task_date_two">Фев, 08, 2016</string>
     <string name="task_date_three">Фев, 05, 2016</string>
 
+    <string name="task_no_address">Нет адреса</string>
+
     <string name="task_duration_days">%1$s дней</string>
 
     <string name="task_address_one">ул. Кротова, 22, Днепропетровск</string>

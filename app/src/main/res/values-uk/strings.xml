@@ -27,6 +27,8 @@
     <string name="task_date_two">Лют, 08, 2016</string>
     <string name="task_date_three">Лют, 05, 2016</string>
 
+    <string name="task_no_address">Нема адреси</string>
+
     <string name="task_duration_days">%1$s днів</string>
 
     <string name="task_address_one">вул. Кротова, 22, Дніпропетровськ</string>

@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity implements MainContract {
     @Override
     public void initViews() {
         ButterKnife.bind(this);
-//        mTlTaskStatus = (TabLayout) findViewById(R.id.tlTaskStatus);
-//        mVpTaskStatus = (ViewPager) findViewById(R.id.vpTaskStatus);
     }
 
     @Override

@@ -73,9 +73,12 @@ public class ExplorePresenter extends BasePresenter<ExploreListView> {
                 .doOnNext(new Action1<List<TaskBean>>() {
                     @Override
                     public void call(List<TaskBean> taskBeen) {
-                        Log.d("mylog", "cache ????");
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(taskBeen);
+                        realm.commitTransaction();
                     }
-                }) // кешируем
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<TaskBean>>() {
                     @Override
@@ -94,50 +97,14 @@ public class ExplorePresenter extends BasePresenter<ExploreListView> {
                     }
 
                     @Override
-                    public void onNext(List<TaskBean> articleListBeanList) {
-
-                        Log.d("mylog", "onNext: 1");
-                        Realm realm = Realm.getDefaultInstance();
-                        Log.d("mylog", "onNext: 2");
-                        realm.beginTransaction();
-                        Log.d("mylog", "onNext: 3");
-                        realm.copyToRealmOrUpdate(articleListBeanList);
-                        Log.d("mylog", "onNext: 4");
-                        realm.commitTransaction();
-                        Log.d("mylog", "onNext: 5");
-
-//                        RealmResults<TaskBean> allNewPosts = articleListBeanList.get(8);
-//
-////                        Realm realm = Realm.getInstance(mContext);
-//                        realm.beginTransaction();
-//                        TaskBean p = realm.createObject(TaskBean.class);
-//                        p.setId(id);
-//                        p.setName(name);
-//                        p.setToken(token);
-//                        p.setPhoto(photo);
-//                        p.setEmail(email);
-//                        realm.commitTransaction();
-
-
-
-//                        final Realm realm1 = Realm.getInstance(application);
-//                        RealmResults<TaskBean> allNewPosts = realm1.where(TaskBean.class).findAll();
+                    public void onNext(List<TaskBean> taskBeen) {
                         if (page == 1) {
-                            getMvpView().refresh(articleListBeanList);
+                            getMvpView().refresh();
                         } else {
-                            getMvpView().loadMore(articleListBeanList);
+                            getMvpView().loadMore();
                         }
-
-//                        callback.onListDataUpdated(TaskBean.from(allNewPosts));
-//                        realm1.close();
                     }
                 });
-
     }
-
-//    private void saveDataToDBorSP(ArticleListEntity articleListEntity) {
-//
-//    }
-
 
 }
