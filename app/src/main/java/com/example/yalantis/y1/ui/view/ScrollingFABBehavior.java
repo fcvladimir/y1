@@ -1,4 +1,4 @@
-package com.example.yalantis.y1.view;
+package com.example.yalantis.y1.ui.view;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

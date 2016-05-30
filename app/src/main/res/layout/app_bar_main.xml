@@ -29,7 +29,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_work_margin"
         android:src="@drawable/ic_fab_plus"
-        app:layout_behavior="com.example.yalantis.y1.view.ScrollingFABBehavior"
+        app:layout_behavior="com.example.yalantis.y1.ui.view.ScrollingFABBehavior"
         app:fabSize="normal"
         app:backgroundTint="@color/fab_color"/>
 
