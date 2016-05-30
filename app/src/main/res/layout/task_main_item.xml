@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/main_list_item_type_margin_top_size"
         android:layout_marginBottom="@dimen/main_list_item_type_margin_bottom_size"
         android:contentDescription="@string/task_type_description"
-        style="@style/ImageView.Base" />
+        style="@style/ImageView.TaskType" />
 
     <TextView
         android:id="@+id/tvTaskLikes"

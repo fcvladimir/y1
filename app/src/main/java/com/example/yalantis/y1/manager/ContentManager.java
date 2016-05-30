@@ -1,94 +1,63 @@
 package com.example.yalantis.y1.manager;
 
-import android.content.Context;
+import com.example.yalantis.y1.model.ProfileModel;
+import com.example.yalantis.y1.model.task.TaskModel;
 
-import com.example.yalantis.y1.R;
-import com.example.yalantis.y1.model.TaskModel;
+import java.util.List;
 
-import java.util.ArrayList;
-import java.util.Random;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ContentManager {
 
-    private Context mContext;
+    private final int TASK_STATE_WORK    = 0;
+    private final int TASK_STATE_DONE    = 1;
+    private final int TASK_STATE_PENDING = 2;
 
-    public ContentManager(Context mContext) {
-        this.mContext = mContext;
+    private final String TASK_STATE_ID   = "state.id";
+
+    private Realm mRealm;
+
+    public ContentManager() {
+        mRealm = Realm.getDefaultInstance();
     }
 
-    public ArrayList<TaskModel> getTaskList() {
-        ArrayList<TaskModel> taskModelList = new ArrayList<>();
-        TaskModel taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/18/0005/1477/374213/13/b4b8e81ac2.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_utilities),
-                mContext.getString(R.string.task_address_one),
-                mContext.getString(R.string.task_date_one),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/19/0005/1477/374213/13/693daa3882.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_building),
-                mContext.getString(R.string.task_address_two),
-                mContext.getString(R.string.task_date_two),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/18/0005/1477/374213/13/b4b8e81ac2.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_utilities),
-                mContext.getString(R.string.task_address_three),
-                mContext.getString(R.string.task_date_three),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/19/0005/1477/374213/13/693daa3882.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_building),
-                mContext.getString(R.string.task_address_one),
-                mContext.getString(R.string.task_date_one),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/18/0005/1477/374213/13/b4b8e81ac2.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_utilities),
-                mContext.getString(R.string.task_address_two),
-                mContext.getString(R.string.task_date_two),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/19/0005/1477/374213/13/693daa3882.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_building),
-                mContext.getString(R.string.task_address_three),
-                mContext.getString(R.string.task_date_three),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/18/0005/1477/374213/13/b4b8e81ac2.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_utilities),
-                mContext.getString(R.string.task_address_one),
-                mContext.getString(R.string.task_date_one),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/19/0005/1477/374213/13/693daa3882.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_building),
-                mContext.getString(R.string.task_address_two),
-                mContext.getString(R.string.task_date_two),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/18/0005/1477/374213/13/b4b8e81ac2.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_utilities),
-                mContext.getString(R.string.task_address_three),
-                mContext.getString(R.string.task_date_three),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        taskModel = new TaskModel("http://dl1.joxi.net/drive/2016/04/19/0005/1477/374213/13/693daa3882.jpg",
-                new Random().nextInt(8)+1,
-                mContext.getString(R.string.task_type_building),
-                mContext.getString(R.string.task_address_one),
-                mContext.getString(R.string.task_date_one),
-                new Random().nextInt(8)+1);
-        taskModelList.add(taskModel);
-        return taskModelList;
+    public void saveTasksToDb(Realm realm, List<TaskModel> taskBeen) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(taskBeen);
+        realm.commitTransaction();
+    }
+
+    public void saveProfileToDb(ProfileModel profileModel) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(profileModel);
+        mRealm.commitTransaction();
+    }
+
+    public RealmResults<TaskModel> getTasksFromDb(int taskStatus) {
+        RealmResults<TaskModel> taskBeen = null;
+        switch (taskStatus) {
+            case TASK_STATE_WORK:
+                taskBeen = mRealm.where(TaskModel.class).equalTo(TASK_STATE_ID, 0).or().equalTo(TASK_STATE_ID, 5).or().equalTo(TASK_STATE_ID, 7).or().equalTo(TASK_STATE_ID, 8).or().equalTo(TASK_STATE_ID, 9).findAll();
+                break;
+            case TASK_STATE_DONE:
+                taskBeen = mRealm.where(TaskModel.class).equalTo(TASK_STATE_ID, 6).or().equalTo(TASK_STATE_ID, 10).findAll();
+                break;
+            case TASK_STATE_PENDING:
+                taskBeen = mRealm.where(TaskModel.class).equalTo(TASK_STATE_ID, 1).or().equalTo(TASK_STATE_ID, 3).or().equalTo(TASK_STATE_ID, 4).findAll();
+                break;
+        }
+        return taskBeen;
+    }
+
+    public ProfileModel getUserProfile() {
+        return mRealm.where(ProfileModel.class).findFirst();
+    }
+
+    public void deleteTasksFromDb(RealmResults<TaskModel> listToDelete) {
+        mRealm.beginTransaction();
+        listToDelete.deleteAllFromRealm();
+        mRealm.commitTransaction();
     }
 
 }

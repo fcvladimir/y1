@@ -24,6 +24,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ProfileActivity" parent="@style/AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
     <style name="MainActivity" parent="@style/AppTheme.Base.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
@@ -125,7 +129,27 @@
     <style name="ImageView.Base" parent="@style/ImageView">
     </style>
 
+    <style name="ImageView.TaskType" parent="@style/ImageView.Base">
+        <item name="android:src">@drawable/ic_doc</item>
+    </style>
+
+    <style name="ImageView.ProfilePhoto" parent="@style/ImageView.Base">
+        <item name="android:width">@dimen/profile_photo_width</item>
+        <item name="android:height">@dimen/profile_photo_height</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="TextView.ProfileName" parent="@style/TextView.Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@+id/ivProfilePhoto</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
     <style name="ImageView.TaskPhoto" parent="@style/ImageView">
+        <item name="android:layout_width">@dimen/task_list_item_task_photo_size</item>
+        <item name="android:layout_height">@dimen/task_list_item_task_photo_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:contentDescription">@string/task_photo_description</item>

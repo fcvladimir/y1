@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivProfilePhoto"
+        style="@style/ImageView.ProfilePhoto"/>
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        style="@style/TextView.ProfileName"/>
+
+</RelativeLayout>

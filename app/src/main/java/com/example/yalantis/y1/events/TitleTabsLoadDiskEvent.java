@@ -13,7 +13,4 @@ public class TitleTabsLoadDiskEvent {
         return listTitleTabs;
     }
 
-    public void setListTitleTabs(List<String> listTitleTabs) {
-        this.listTitleTabs = listTitleTabs;
-    }
 }

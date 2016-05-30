@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Yalantis task 1</string>
+    <string name="app_name" translatable="false">Yalantis task 3</string>
+
+    <string name="profile_screen_name">Profile</string>
+
+    <string name="facebook_app_id" translatable="false">1763635803871818</string>
 
     <string name="task_type_utilities">Utilities</string>
     <string name="task_type_building">Landscaping and construction</string>

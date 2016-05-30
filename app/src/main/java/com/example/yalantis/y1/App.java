@@ -27,9 +27,9 @@ public class App extends Application {
 
     private void initApplication() {
         mInstance = this;
-        contentManager = new ContentManager(this);
         initImageLoader();
         initRealm();
+        contentManager = new ContentManager();
     }
 
     /**
@@ -39,7 +39,10 @@ public class App extends Application {
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
     }
 
+    /**
+     * Initialize configuration of R library (Default configuration).
+     */
     private void initRealm() {
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(this).build());
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(this).deleteRealmIfMigrationNeeded().build());
     }
 }

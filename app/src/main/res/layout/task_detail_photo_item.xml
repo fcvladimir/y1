@@ -9,8 +9,6 @@
 
     <ImageView
         android:id="@+id/ivTaskPhoto"
-        android:layout_width="@dimen/task_list_item_task_photo_size"
-        android:layout_height="@dimen/task_list_item_task_photo_size"
         style="@style/ImageView.TaskPhoto"/>
 
 </android.support.v7.widget.CardView>

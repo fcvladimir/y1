@@ -46,4 +46,8 @@
     <dimen name="main_list_item_likes_padding_left_size">20dp</dimen>
     <dimen name="main_list_item_likes_padding_right_size">20dp</dimen>
     <dimen name="main_list_item_likes_padding_bottom_size">16.6dp</dimen>
+
+    <!-- Profile. -->
+    <dimen name="profile_photo_width">100dp</dimen>
+    <dimen name="profile_photo_height">100dp</dimen>
 </resources>

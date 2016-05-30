@@ -1,4 +1,6 @@
 <resources>
+    <string name="profile_screen_name">Профиль</string>
+
     <string name="task_type_utilities">Коммунальное хозяйство</string>
     <string name="task_type_building">Благоустройство и строительство</string>
     <string name="task_status">В работе</string>
